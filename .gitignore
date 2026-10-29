@@ -1,6 +1,3 @@
-**/.claude-plugin/types/
 node_modules/
-_private/
-site/.astro/
-.wrangler/
+**/.claude-plugin/types/
 companion/dist/

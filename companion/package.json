@@ -18,11 +18,11 @@
   ],
   "homepage": "https://accidentalintelligence.org/mascots/",
   "bugs": {
-    "url": "https://github.com/jabianch/accidental-intelligence/issues"
+    "url": "https://github.com/jabianch/apocalypse-mascots/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jabianch/accidental-intelligence.git",
+    "url": "git+https://github.com/jabianch/apocalypse-mascots.git",
     "directory": "companion"
   },
   "author": "Accidental Intelligence (an art project by Joseph Bianchi)",

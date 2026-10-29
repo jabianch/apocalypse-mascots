@@ -2,7 +2,7 @@
 
 **Code with AI as it really is.** Now in Codex, Gemini CLI, Cursor, Copilot, OpenCode, Windsurf and the rest.
 
-In Claude Code the creature lives above your prompt: that is the [plugin](https://github.com/jabianch/accidental-intelligence/tree/master/plugins/apocalypse-mascots). Every other agent keeps its own screen to itself, so here the creature takes a pane of its own beside it, and grows from the agent's hooks: one stage for each kind of thing you let the agent do.
+In Claude Code the creature lives above your prompt: that is the [plugin](https://github.com/jabianch/apocalypse-mascots/tree/main/plugins/apocalypse-mascots). Every other agent keeps its own screen to itself, so here the creature takes a pane of its own beside it, and grows from the agent's hooks: one stage for each kind of thing you let the agent do.
 
 ## Install, for Codex
 
@@ -40,6 +40,6 @@ It never stops your agent: it reads each tool call after the tool has run, says 
 
 ## How it is built
 
-The same drawing code as the plugin and the site ([`mascot.ts`](https://github.com/jabianch/accidental-intelligence/blob/master/plugins/apocalypse-mascots/hooks/mascot.ts) and [`figures.ts`](https://github.com/jabianch/accidental-intelligence/blob/master/plugins/apocalypse-mascots/hooks/figures.ts)), bundled into one file with no dependencies. Truecolor where the terminal has it, the 256-colour cube where it does not. Tests: `npm test`.
+The same drawing code as the plugin and the site ([`mascot.ts`](https://github.com/jabianch/apocalypse-mascots/blob/main/plugins/apocalypse-mascots/hooks/mascot.ts) and [`figures.ts`](https://github.com/jabianch/apocalypse-mascots/blob/main/plugins/apocalypse-mascots/hooks/figures.ts)), bundled into one file with no dependencies. Truecolor where the terminal has it, the 256-colour cube where it does not. Tests: `npm test`.
 
-Site: https://accidentalintelligence.org/mascots/ · Source: https://github.com/jabianch/accidental-intelligence/tree/master/companion
+Site: https://accidentalintelligence.org/mascots/ · Source: https://github.com/jabianch/apocalypse-mascots
