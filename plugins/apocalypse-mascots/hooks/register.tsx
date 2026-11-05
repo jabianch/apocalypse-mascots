@@ -160,13 +160,20 @@ export const register: Register = on => {
     }
   })
 
+  // It takes only what it is given: a call you refuse comes back as { deny } and grants nothing.
+  // A call that ran and failed still counts; the access was real. The tally is its own
+  // try, so a slip here can never send the call through a second time.
   on('tool.call', async ($, e, next) => {
-    const { sense, server } = classify(e.tool)
-    const { after, unlocked } = grant(await read($, reach), sense, server)
-    await update($, reach, () => after)
-    if (unlocked) $.ui.toast(unlocked, { timeoutMs: 5000 })
-    return next(e)
-  }).catch(($, e, next) => next(e))
+    const result = await next(e)
+    if (result.deny) return result
+    try {
+      const { sense, server } = classify(e.tool)
+      const { after, unlocked } = grant(await read($, reach), sense, server)
+      await update($, reach, () => after)
+      if (unlocked) $.ui.toast(unlocked, { timeoutMs: 5000 })
+    } catch {}
+    return result
+  })
 
   on('turn.start', ($, e, next) => { seed = hash(seed, e.turnId.length, 1); isWorking = true; return next(e) })
   on('turn.complete', ($, e, next) => { isWorking = false; return next(e) })

@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process'
-import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, utimesSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
@@ -153,4 +153,18 @@ test('setup --write adds the hooks once, keeps what was there, and keeps a copy'
   writeFileSync(file, '{ // a comment\n }')
   assert.match(h.cli(['setup', 'gemini', '--write'], '', env).stdout, /left alone/)
   h.done()
+})
+
+test('a log a week old goes on the next prompt, for an agent with no start event', () => {
+  const home = mkdtempSync(join(tmpdir(), 'mascot-sweep-'))
+  const sessions = join(home, 'sessions')
+  const old = join(sessions, 'windsurf-old.jsonl')
+  const env = { ...process.env, APOCALYPSE_MASCOTS_HOME: home }
+  mkdirSync(sessions, { recursive: true })
+  writeFileSync(old, '{}\n')
+  const stale = new Date(Date.now() - 8 * 24 * 3600 * 1000)
+  utimesSync(old, stale, stale)
+  spawnSync(process.execPath, [BIN, 'hook', 'windsurf'], { input: JSON.stringify({ agent_action_name: 'pre_user_prompt', trajectory_id: 's1' }), env })
+  assert.equal(existsSync(old), false)
+  rmSync(home, { recursive: true, force: true })
 })

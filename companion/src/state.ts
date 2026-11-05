@@ -41,7 +41,8 @@ export function append(session: string, e: Event): void {
   mkdirSync(SESSIONS, { recursive: true })
   // one short line per write, opened for append: concurrent hooks never interleave
   appendFileSync(join(SESSIONS, `${safe(e.agent)}-${safe(session)}.jsonl`), JSON.stringify(e) + '\n')
-  if (e.ev === 'start') sweep()
+  // not every agent has a start event (Windsurf), so a prompt sweeps too
+  if (e.ev === 'start' || e.ev === 'prompt') sweep()
 }
 
 // logs a week old are forgotten

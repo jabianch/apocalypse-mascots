@@ -3,11 +3,12 @@ by Joseph Bianchi (Accidental Intelligence), Amsterdam.
 
 Two licenses apply:
 
-1. CODE — everything under hooks/, types/, companion/src/, the test files, the
-   manifests and the build configuration — is released under the MIT License (below).
+1. CODE — everything under plugins/apocalypse-mascots/hooks/,
+   plugins/apocalypse-mascots/types/, and companion/src/, the test files,
+   preview.py, the manifests and the build configuration, except what clause 2
+   names — is released under the MIT License (below).
 
-2. ART AND COPY — the creature designs, their names (Yoggy, Shubby, Shoggy), the
-   color schemes, the toasts, the spinner words, the manifesto, the READMEs and
+2. ART AND COPY — the creature designs, the color schemes, the toasts, the spinner words, the manifesto, the READMEs and
    PROCESS logs, and any images — are released under the Creative Commons
    Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0),
    https://creativecommons.org/licenses/by-nc/4.0/ . You may share and adapt

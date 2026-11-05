@@ -20,7 +20,7 @@ In a terminal session of Claude Code:
 /plugin install apocalypse-mascots --marketplace jabianch/accidental-intelligence
 ```
 
-Answer `y` to add the marketplace, then pick the user scope. The creature lives above your prompt.
+Answer `y` to add the marketplace, then pick the user scope. The creature lives above your prompt. It needs Claude Code v2.1.287 or later (`claude --version`).
 
 ### Codex, Cursor, Gemini CLI, Copilot, OpenCode, Windsurf, Qwen Code, Factory Droid
 
@@ -29,7 +29,9 @@ npm install -g apocalypse-mascots
 apocalypse-mascots setup codex --write
 ```
 
-Put your agent's name where `codex` is. In Codex, also open `/hooks` and trust the four apocalypse-mascots hooks: Codex runs no hook until you do. Then run `apocalypse-mascots` in a terminal beside the agent. Every other agent keeps its screen to itself, so the creature gets a pane of its own. Details: [companion/](companion/).
+Put your agent's name where `codex` is: `cursor`, `gemini`, `copilot`, `opencode`, `windsurf`, `qwen`, or `factory`. In Codex, also open `/hooks` and trust the four apocalypse-mascots hooks: Codex skips new hooks until you do. Then run `apocalypse-mascots` in a terminal beside the agent. Every other agent keeps its screen to itself, so the creature gets a pane of its own. Details: [companion/](companion/).
+
+The pane is new. Its hooks are written from each agent's documentation and have not been run against the real agents yet, so tell me what breaks. Windsurf reports fewer kinds of tool call, so there it reaches four of the six stages.
 
 ## The forms
 
@@ -43,16 +45,20 @@ Six color schemes, two of them out: cuddly-apocalypse and foetid-ichor. The rest
 
 ## What it never does
 
-It never stops your agent and never makes a network call. It never reads your prompts or the model's answers: it counts tool calls by name and draws. In Claude Code it stores nothing outside the session and changes no setting. The pane for other agents writes one line per tool call (the event, the agent, the tool's name) to `~/.apocalypse-mascots/`, deletes a log a week old, and touches your agent's config only when you pass `--write`.
+It never stops your agent and never makes a network call.
+
+In Claude Code it never reads your prompts or the model's answers: it counts tool calls by name and draws. It stores nothing outside the session and changes no setting.
+
+The pane for other agents is handed whatever each agent gives its hooks, which can include your prompts. It keeps none of it. It writes one line per event (the time, the event, the agent, and the tool's name) to `~/.apocalypse-mascots/`, in a file named for the session, and clears logs a week old. It touches your agent's config only when you pass `--write`.
 
 ## In this repository
 
 - [`plugins/apocalypse-mascots/`](plugins/apocalypse-mascots/): the Claude Code plugin. `hooks/register.tsx` is the band, `hooks/mascot.ts` the creature, `hooks/figures.ts` the drawn forms. Tests: `claude plugin test .`
 - [`companion/`](companion/): the npm package, the same drawing code in a pane of its own, fed by the other agents' hooks. Tests: `npm test`
-- [`PROCESS.md`](plugins/apocalypse-mascots/PROCESS.md): the design log. Building in public can be horrifying.
+- [`PROCESS.md`](plugins/apocalypse-mascots/PROCESS.md): the design log.
 
 ## License
 
-MIT for the code. CC BY-NC 4.0 for the creature, its names, the copy and the images. See [LICENSE](LICENSE).
+MIT for the code. CC BY-NC 4.0 for the creature, the copy, and the images. See [LICENSE](LICENSE).
 
 An object of [Accidental Intelligence](https://accidentalintelligence.org), an art project by Joseph Bianchi, Amsterdam. Site: https://accidentalintelligence.org/mascots/

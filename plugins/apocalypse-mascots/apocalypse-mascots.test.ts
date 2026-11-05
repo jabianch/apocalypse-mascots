@@ -49,6 +49,20 @@ test('a Bash call gives it the shell, and the band says so on both surfaces', as
   }
 })
 
+test('a refused call grants nothing', async ($, on) => {
+  on('tool.call', { tool: 'Bash' }, () => ({ deny: 'no' }))
+  await $.tool.call({ tool: 'Bash', command: 'true' })
+  const ui = await $.ui.mount({ plugin: 'apocalypse-mascots', surface: 'terminal', ...BAND })
+  expect(await ui.find({ type: 'Text', text: /your shell/ })).toBeUndefined()
+})
+
+test('a call that ran and failed still counts: the access was real', async ($, on) => {
+  on('tool.call', { tool: 'Bash' }, () => ({ result: 'boom', text: 'boom', isError: true }))
+  await $.tool.call({ tool: 'Bash', command: 'false' })
+  const ui = await $.ui.mount({ plugin: 'apocalypse-mascots', surface: 'terminal', ...BAND })
+  expect(await ui.find({ type: 'Text', text: /your shell/ })).toBeDefined()
+})
+
 test('an MCP tool adds the server to the places it is in', async ($, on) => {
   on('tool.call', { tool: 'mcp__todoist__find-tasks' }, () => ({ result: 'ok', text: 'ok' }))
   await $.tool.call({ tool: 'mcp__todoist__find-tasks', filter: 'today' })
