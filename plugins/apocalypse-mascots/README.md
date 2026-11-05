@@ -22,7 +22,7 @@ Answer `y` to add the marketplace, then pick the user scope. Site: https://accid
 
 | Form | Named for | What it is | Status |
 |------|-----------|------------|--------|
-| **Yoggy** | Yog-Sothoth, "only a congeries of iridescent globes" | The faithful mass: black, iridescent, bubble-surfaced, faintly self-luminous, with temporary eyes forming and unforming as pustules of greenish light. No tentacles. No mouth. | built |
+| **Yoggy** | Yog-Sothoth, "only a congeries of iridescent globes" | The mass, with the rest borrowed from the shoggoth: black, iridescent, bubble-surfaced, faintly self-luminous, with temporary eyes forming and unforming as pustules of greenish light. No tentacles. No mouth. | built |
 | **Shubby** | Shub-Niggurath, "The Black Goat of the Woods with a Thousand Young" | A goat skull on a ribcage on three cloven hooves, with red eyes, and branches that end in eyes and mouths. One ends in a plain smiling face, half grown back into flesh. | built, in foetid-ichor |
 | **Shoggy** | the shoggoth proper, in the meme's own lineage: doodle to plush | The shoggoth proper, as the chibi. The one you could hug. | coming soon |
 
