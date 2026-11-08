@@ -1,4 +1,4 @@
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { dirname, join } from 'node:path'
 
@@ -13,9 +13,12 @@ const H = homedir()
 
 // the command the hooks run: this very file under this very node, so an editor
 // started from the desktop finds it without the shell's PATH; from an npx cache,
-// which does not last, the installed command instead
+// which does not last, the installed command instead. The script is followed
+// to the file itself: a version manager's per-shell bin folder (fnm's
+// multishells) is a symlink that is gone once that shell closes
 function command(agent: string): string {
-  const script = process.argv[1] ?? ''
+  let script = process.argv[1] ?? ''
+  try { if (script) script = realpathSync(script) } catch {}
   if (!script || /[\\/]_npx[\\/]/.test(script)) return `apocalypse-mascots hook ${agent}`
   const q = (s: string) => (/[\s"]/.test(s) ? JSON.stringify(s) : s)
   return `${q(process.execPath)} ${q(script)} hook ${agent}`

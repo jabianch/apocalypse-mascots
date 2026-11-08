@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, utimesSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, symlinkSync, utimesSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
@@ -152,6 +152,25 @@ test('setup --write adds the hooks once, keeps what was there, and keeps a copy'
   assert.match(h.cli(['setup', 'gemini', '--write'], '', env).stdout, /already runs the hooks/)
   writeFileSync(file, '{ // a comment\n }')
   assert.match(h.cli(['setup', 'gemini', '--write'], '', env).stdout, /left alone/)
+  h.done()
+})
+
+test('setup writes the file itself into the hooks, never a symlink that may not last', () => {
+  const h = home()
+  const fake = join(h.dir, 'user')
+  mkdirSync(join(fake, '.gemini'), { recursive: true })
+  // fnm's per-shell bin folder: a symlink to the package, gone when the shell closes
+  const shell = join(h.dir, 'multishell', 'bin')
+  mkdirSync(shell, { recursive: true })
+  const link = join(shell, 'apocalypse-mascots')
+  symlinkSync(BIN, link)
+  const r = spawnSync(process.execPath, [link, 'setup', 'gemini', '--write'], {
+    encoding: 'utf8', env: { ...process.env, APOCALYPSE_MASCOTS_HOME: h.dir, HOME: fake, USERPROFILE: fake },
+  })
+  assert.match(r.stdout, /Added 4 hooks/)
+  const cmd = JSON.parse(readFileSync(join(fake, '.gemini', 'settings.json'), 'utf8')).hooks.AfterTool[0].hooks[0].command
+  assert.ok(cmd.includes(realpathSync(BIN)), cmd)
+  assert.ok(!cmd.includes('multishell'), cmd)
   h.done()
 })
 
