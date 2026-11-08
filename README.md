@@ -24,7 +24,14 @@ Answer `y` to add the marketplace, then pick the user scope. The creature lives 
 
 ### Codex, Cursor, Gemini CLI, Copilot, OpenCode, Windsurf, Qwen Code, Factory Droid
 
-Coming soon to your region.
+```
+npm install -g apocalypse-mascots
+apocalypse-mascots setup codex --write
+```
+
+Put your agent's name where `codex` is: `cursor`, `gemini`, `copilot`, `opencode`, `windsurf`, `qwen`, or `factory`. In Codex, also open `/hooks` and trust the four apocalypse-mascots hooks: Codex skips new hooks until you do. Then run `apocalypse-mascots` in a terminal beside the agent. Every other agent keeps its screen to itself, so the creature gets a pane of its own. Details: [companion/](companion/).
+
+Windsurf reports fewer kinds of tool call, so there it reaches four of the six stages.
 
 ## The forms
 
