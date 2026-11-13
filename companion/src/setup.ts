@@ -34,7 +34,6 @@ type Agent = {
   at?: (doc: Json) => Json
   extra?: (doc: Json) => void
   after?: string
-  tested: boolean
 }
 
 // Claude Code's shape, which Codex, Gemini, Kiro, Qwen and Factory share
@@ -47,43 +46,36 @@ const AGENTS: Record<string, Agent> = {
     name: 'Codex CLI', file: join(H, '.codex', 'hooks.json'),
     hooks: nested(['SessionStart', 'UserPromptSubmit', 'PostToolUse', 'Stop'], 5), at: hooksKey,
     after: 'Codex runs a hook only once you trust it: start Codex, open /hooks, and trust the four apocalypse-mascots hooks.',
-    tested: false,
   },
   gemini: {
     name: 'Gemini CLI', file: join(H, '.gemini', 'settings.json'),
     hooks: nested(['SessionStart', 'BeforeAgent', 'AfterTool', 'AfterAgent'], 5000), at: hooksKey,
     extra: doc => { (doc.hooksConfig ??= {}).notifications ??= false },
-    tested: false,
   },
   cursor: {
     name: 'Cursor (the editor and cursor-agent)', file: join(H, '.cursor', 'hooks.json'),
     hooks: cmd => Object.fromEntries(['sessionStart', 'beforeSubmitPrompt', 'postToolUse', 'stop'].map(e => [e, [{ command: cmd, timeout: 5 }]])),
     at: hooksKey, extra: doc => { doc.version ??= 1 },
-    tested: false,
   },
   copilot: {
     // PascalCase events get the snake_case payload, with Claude Code's tool names
     name: 'GitHub Copilot CLI', file: join(process.env.COPILOT_HOME ?? join(H, '.copilot'), 'hooks', 'apocalypse-mascots.json'),
     hooks: cmd => Object.fromEntries(['SessionStart', 'UserPromptSubmit', 'PostToolUse', 'Stop'].map(e => [e, [{ type: 'command', bash: cmd, powershell: cmd, timeoutSec: 5 }]])),
     at: hooksKey, extra: doc => { doc.version ??= 1 },
-    tested: false,
   },
   windsurf: {
     name: 'Windsurf (Devin Desktop)', file: join(H, '.codeium', 'windsurf', 'hooks.json'),
     hooks: cmd => Object.fromEntries(['pre_user_prompt', 'post_read_code', 'post_write_code', 'post_run_command', 'post_mcp_tool_use', 'post_cascade_response']
       .map(e => [e, [{ command: cmd, show_output: false }]])),
     at: hooksKey,
-    tested: false,
   },
   qwen: {
     name: 'Qwen Code', file: join(H, '.qwen', 'settings.json'),
     hooks: nested(['SessionStart', 'UserPromptSubmit', 'PostToolUse', 'Stop'], 5), at: hooksKey,
-    tested: false,
   },
   factory: {
     name: 'Factory Droid', file: join(H, '.factory', 'hooks.json'),
     hooks: nested(['SessionStart', 'UserPromptSubmit', 'PostToolUse', 'Stop'], 5), at: hooksKey,
-    tested: false,
   },
 }
 
@@ -125,7 +117,7 @@ export function setup(agent?: string, write = false): string {
   if (!agent) return list
   if (agent === 'opencode') {
     const src = opencodePlugin(command('opencode'))
-    if (!write) return `OpenCode (untested): save this as ${OPENCODE_FILE}\n\n${src}`
+    if (!write) return `OpenCode: save this as ${OPENCODE_FILE}\n\n${src}`
     if (existsSync(OPENCODE_FILE)) return `${OPENCODE_FILE} is already there; left as it is.`
     mkdirSync(dirname(OPENCODE_FILE), { recursive: true })
     writeFileSync(OPENCODE_FILE, src)
@@ -135,12 +127,11 @@ export function setup(agent?: string, write = false): string {
   if (!a) return list
   const cmd = command(agent)
   const add = a.hooks(cmd)
-  const untested = a.tested ? '' : ' (untested)'
   if (!write) {
     const doc: Json = {}
     a.extra?.(doc)
     Object.assign((a.at ?? hooksKey)(doc), add)
-    return `${a.name}${untested}: add to ${a.file}\n\n${JSON.stringify(doc, null, 2)}${a.after ? `\n\n${a.after}` : ''}`
+    return `${a.name}: add to ${a.file}\n\n${JSON.stringify(doc, null, 2)}${a.after ? `\n\n${a.after}` : ''}`
   }
   let doc: Json = {}
   let before = ''

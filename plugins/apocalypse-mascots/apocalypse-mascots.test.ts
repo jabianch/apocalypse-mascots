@@ -101,6 +101,7 @@ test('/mascot form picks a form; the unbuilt ones say so', async $ => {
   expect((await run('scheme strange-aeons')).text).toMatch(/coming soon to your region/)
   expect((await run('scheme soft-doom')).text).toMatch(/Schemes: cuddly-apocalypse, foetid-ichor, scarred-bones/)
   expect((await run('scheme foetid-ichor')).text).toBe('foetid-ichor.')
+  expect((await run('scheme scarred-bones')).text).toBe('scarred-bones.')
   expect((await run('manifesto')).text).toMatch(/Accidental Intelligence/)
 })
 
@@ -132,7 +133,7 @@ test('foetid-ichor paints it tar and greenish-yellow, with red eyes and a pale i
 test('on a light terminal it brings its own dark ground and keeps its scheme, in every built scheme', async ($, on) => {
   await grown($, on)
   const run = (args: string) => $.command.run({ command: 'mascot', args, origin: { kind: 'composer' }, presentation: { isFullscreen: false, columns: 80 } })
-  for (const id of ['cuddly-apocalypse', 'foetid-ichor']) {
+  for (const id of ['cuddly-apocalypse', 'foetid-ichor', 'scarred-bones']) {
     await run(`scheme ${id}`)
     const drawn: Record<string, { ch: string; fg: number; bg: number }[]> = {}
     for (const th of ['dark', 'light']) {

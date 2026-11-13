@@ -15,7 +15,7 @@ export const BUILT_FORMS = new Set<Form>(['yoggy', 'shubby'])
 export const NATIVE: Record<Form, Scheme> = { yoggy: 'cuddly-apocalypse', shubby: 'foetid-ichor', shoggy: 'strange-aeons' }
 // in release order: each drop opens the next one's gate
 export const SCHEMES: Scheme[] = ['cuddly-apocalypse', 'foetid-ichor', 'scarred-bones', 'strange-aeons', 'imitated-accents', 'cosmic-pulsing']
-export const BUILT_SCHEMES = new Set<Scheme>(['cuddly-apocalypse', 'foetid-ichor'])
+export const BUILT_SCHEMES = new Set<Scheme>(['cuddly-apocalypse', 'foetid-ichor', 'scarred-bones'])
 
 // ---------------------------------------------------------------------------
 // what the session has been granted: each agent names its tools its own way,

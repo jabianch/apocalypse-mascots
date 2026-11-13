@@ -41,7 +41,7 @@ Windsurf reports fewer kinds of tool call, so there it reaches four of the six s
 | **Shubby** | Shub-Niggurath, "The Black Goat of the Woods with a Thousand Young" | out, in foetid-ichor |
 | **Shoggy** | the shoggoth proper, in the meme's own lineage: doodle to plush | coming soon |
 
-Six color schemes, two of them out: cuddly-apocalypse and foetid-ichor. The rest open in later drops.
+Six color schemes, three of them out: cuddly-apocalypse, foetid-ichor, and scarred-bones. The rest open in later drops.
 
 ## What it never does
 

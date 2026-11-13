@@ -118,3 +118,11 @@ Design reasoning, in order, the way Pippin Barr keeps it. Newest entry last. The
 
 **Next.** Scarred-bones, then strange-aeons, then Shoggy.
 
+
+## 2026-11-13 — Scarred-bones, the third scheme, with the launch
+
+**Notes.** Scarred-bones goes out with the Product Hunt launch, not after it. Nothing may call this a Claude Code product: it installs in Claude Code and, through the pane, beside the other agents.
+
+**Done.** The scheme was already ported for both forms; this opens its gate in the plugin, the pane and the site. Yoggy is bone over sepia in a Bayer dither, the light sliding across, with green eyes; Shubby reads as its skeleton. The site's full growth opens in it as the newest. The light-terminal test now loops over it too. Version 0.5.0.
+
+**Next.** Shoggy, redesigned for cells, as the update after the launch; then strange-aeons.

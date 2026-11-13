@@ -28,9 +28,9 @@ Answer `y` to add the marketplace, then pick the user scope. Site: https://accid
 
 ## The color schemes
 
-cuddly-apocalypse (built) · foetid-ichor (built) · scarred-bones · strange-aeons · imitated-accents · cosmic-pulsing
+cuddly-apocalypse (built) · foetid-ichor (built) · scarred-bones (built) · strange-aeons · imitated-accents · cosmic-pulsing
 
-`/mascot scheme foetid-ichor` paints it tar in the shadow and foetid greenish-yellow ichor in the light, with red eyes. The other four open in later drops.
+`/mascot scheme foetid-ichor` paints it tar in the shadow and foetid greenish-yellow ichor in the light, with red eyes. `/mascot scheme scarred-bones` paints it in bone over sepia, with green eyes; Shubby reads as its skeleton. The other three open in later drops.
 
 ## What it does
 
